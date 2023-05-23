@@ -1,24 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import {
+  BrowserRouter as Router,
+  Link,
+  NavLink,
+  Route,
+  Routes,
+} from "react-router-dom";
+import HomePage from "./components/HomePage";
+import NewPost from "./components/NewPost";
+import ViewPost from "./components/ViewPost";
+import EditPost from "./components/EditPost";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Router>
+        <div className="header">
+          <Link to="/" className="title">
+            Все посты
+          </Link>
+          {'  '}
+          <NavLink to="/posts/new" className={"create-post-button"}>
+            Создать пост
+          </NavLink>
+        </div>
+
+        <Routes>
+          <Route index path="/" element={<HomePage />} />
+          <Route path="/posts/new" element={<NewPost />} />
+          <Route path="/posts/:id" element={<ViewPost />} />
+          <Route path='/posts/:id/edit' element={<EditPost />} />
+        </Routes>
+      </Router>
+    </>
   );
 }
 
